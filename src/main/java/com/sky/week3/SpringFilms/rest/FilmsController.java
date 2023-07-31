@@ -61,9 +61,9 @@ public class FilmsController {
 
     @DeleteMapping("/remove")
     public Boolean remove(
-            @PathParam("year") Integer year,
-            @PathParam("title") String title,
-            @PathParam("genre") String genre) {
+            @RequestParam(name = "year", required = false) Integer year,
+            @RequestParam(name = "title", required = false) String title,
+            @RequestParam(name = "genre", required = false) String genre) {
 
         System.out.println("Title: "+title);
         System.out.println("Genre: "+genre);
@@ -71,12 +71,6 @@ public class FilmsController {
 
         System.out.println("Before: "+films);
         int initialSize = films.size();
-//        for (Film film : new ArrayList<>(films)) {
-//            if ((film.getTitle().equals(title)) || ((film.getGenre().equals(genre)))
-//            || (film.getYear().equals(year))) {
-//                films.remove(film);
-//            }
-//        }
 
         films.removeIf(film -> (film.getTitle().equals(title))
                 || film.getGenre().equals(genre)
@@ -86,8 +80,6 @@ public class FilmsController {
         System.out.println("After: "+films);
         return films.size() < initialSize;
     }
-
-
 
 
 }
