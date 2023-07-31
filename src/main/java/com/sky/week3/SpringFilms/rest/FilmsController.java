@@ -24,6 +24,17 @@ public class FilmsController {
         return new ResponseEntity<>(created, HttpStatus.CREATED) ;
     }
 
+    @PostMapping("/createMultiple")
+    public ResponseEntity<List<Film>> create(@RequestBody List<Film> addFilms) {
+        System.out.println(addFilms);
+        System.out.println("Before: "+films);
+        int initialSize = films.size();
+        films.addAll(addFilms);
+        System.out.println("After: "+films);
+        List<Film> newFilms = films.subList(initialSize , films.size());
+        return new ResponseEntity<>(newFilms, HttpStatus.CREATED) ;
+    }
+
 
     @GetMapping("/get/{id}")
     public Film getById(@PathVariable Integer id) {
