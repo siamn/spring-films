@@ -58,5 +58,15 @@ public class FilmsController {
         return service.remove(year, title, genre);
     }
 
+    @GetMapping("/getByTitle")
+    public List<Film> getFilmByTitle(@RequestParam(name = "title", required = true) String title)  {
+        return service.getFilmByTitle(title);
+    }
+
+    @GetMapping("/getByGenre")
+    public List<Film> getFilmByGenre(@RequestParam(name = "genre", required = true) String genre)  {
+        return service.getFilmByGenre(genre);
+    }
+
 
 }

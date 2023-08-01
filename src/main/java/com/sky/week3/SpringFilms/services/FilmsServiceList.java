@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Primary
 @Service
 public class FilmsServiceList implements FilmsService {
 
@@ -67,4 +66,27 @@ public class FilmsServiceList implements FilmsService {
         System.out.println("After: "+films);
         return films.size() < initialSize;
     }
+
+
+    private List<Film> getFilmByMatchingString(String str) {
+        List<Film> found = new ArrayList<>();
+        for (Film film : films) {
+            if (film.getTitle().equals(str)) {
+                found.add(film);
+            }
+        }
+        return found;
+    }
+
+    @Override
+    public List<Film> getFilmByTitle(String title) {
+        return getFilmByMatchingString(title);
+    }
+
+    @Override
+    public List<Film> getFilmByGenre(String genre) {
+        return getFilmByMatchingString(genre);
+    }
+
+
 }

@@ -21,4 +21,7 @@ public interface FilmsService {
 
     Boolean remove(Integer year, String title, String genre);
 
+    List<Film> getFilmByTitle(String title);
+
+    List<Film> getFilmByGenre(String genre);
 }

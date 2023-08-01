@@ -10,6 +10,7 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = false, nullable = true)
     private String title;
     @Column(name="releaseYear")   // year is a reserved keyword so need this for the field
     private Integer year;
