@@ -1,12 +1,27 @@
 package com.sky.week3.SpringFilms.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Film {
 
-    private String title;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String title;
+    @Column(name="releaseYear")   // year is a reserved keyword so need this for the field
     private Integer year;
 
     private String genre;
+
+    public Film(Integer id, String title, Integer year, String genre) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.genre = genre;
+    }
 
     public Film() {
 
@@ -41,6 +56,14 @@ public class Film {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
