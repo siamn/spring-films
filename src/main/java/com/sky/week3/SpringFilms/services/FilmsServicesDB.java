@@ -1,6 +1,7 @@
 package com.sky.week3.SpringFilms.services;
 
 import com.sky.week3.SpringFilms.domain.Film;
+import com.sky.week3.SpringFilms.exceptions.FilmNotFoundException;
 import com.sky.week3.SpringFilms.repos.FilmRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class FilmsServicesDB implements FilmsService {
     @Override
     public Film getById(int id) {
         Optional<Film> optionalFilm = this.repo.findById(id);
-        return optionalFilm.orElse(null);
+        return optionalFilm.orElseThrow(() -> new FilmNotFoundException());
     }
 
     @Override

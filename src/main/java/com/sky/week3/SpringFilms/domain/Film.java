@@ -1,6 +1,11 @@
 package com.sky.week3.SpringFilms.domain;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Film {
@@ -11,10 +16,15 @@ public class Film {
     private Integer id;
 
     @Column(unique = false, nullable = true)
+    @NotBlank
     private String title;
+
     @Column(name="releaseYear")   // year is a reserved keyword so need this for the field
+    @Range(min=1920, max=2025)
     private Integer year;
 
+    @Size(min=1, max=15)
+    @NotBlank
     private String genre;
 
     public Film(Integer id, String title, Integer year, String genre) {

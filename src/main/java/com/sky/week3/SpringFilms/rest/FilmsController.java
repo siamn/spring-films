@@ -4,6 +4,7 @@ import com.sky.week3.SpringFilms.domain.Film;
 import com.sky.week3.SpringFilms.services.FilmsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -21,7 +22,7 @@ public class FilmsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Film> create(@RequestBody Film film) {
+    public ResponseEntity<Film> create(@RequestBody @Validated Film film) {
         return new ResponseEntity<>(service.create(film), HttpStatus.CREATED) ;
     }
 
