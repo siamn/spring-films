@@ -27,7 +27,7 @@ public class FilmsController {
     }
 
     @PostMapping("/createMultiple")
-    public ResponseEntity<List<Film>> create(@RequestBody List<Film> addFilms) {
+    public ResponseEntity<List<Film>> create(@RequestBody @Validated List<Film> addFilms) {
         return new ResponseEntity<>(service.create(addFilms), HttpStatus.CREATED) ;
     }
 

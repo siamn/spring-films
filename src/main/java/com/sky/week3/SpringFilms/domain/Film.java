@@ -23,7 +23,7 @@ public class Film {
     @Range(min=1920, max=2025)
     private Integer year;
 
-    @Size(min=1, max=15)
+    @Size(min=1, max=25)
     @NotBlank
     private String genre;
 
