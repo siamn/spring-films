@@ -14,8 +14,10 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,6 +32,9 @@ public class FilmsMVCTest {
 
     @Autowired
     private ObjectMapper mapper;
+
+
+    private final Film defaultFilm = new Film(1, "Dune", 2021, "Action");
 
 
     @Test
@@ -68,10 +73,58 @@ public class FilmsMVCTest {
     @Test
     void testRead() throws Exception {
         final int id = 1;
-        String responseBody = this.mapper.writeValueAsString(new Film(id, "Dune", 2021,  "Action"));
+        String responseBody = this.mapper.writeValueAsString(defaultFilm);
         this.mvc.perform(get("/get/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().json(responseBody));
     }
+
+
+    @Test
+    void testReadAll() throws Exception {
+        final int id = 1;
+        List<Film> films = new ArrayList<>();
+        films.add(defaultFilm);
+        String responseBody = this.mapper.writeValueAsString(films);
+        this.mvc.perform(get("/getAll"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(responseBody));
+    }
+
+
+
+    @Test
+    void testRemoveId() throws Exception {
+        final int id = 1;
+        String responseBody = this.mapper.writeValueAsString(defaultFilm);
+        this.mvc.perform(delete("/remove/" + id)).andExpect(status().isOk()).andExpect(content().json(responseBody));
+    }
+
+
+    @Test
+    void testRemove() throws Exception {
+        final int id = 1;
+        final Integer year = 2021;
+        this.mvc.perform(delete("/remove?year="+year)).andExpect(status().isOk()).andExpect(content().string("true"));
+    }
+
+    @Test
+    void testGetByTitle() throws Exception {
+        final String title = "Dune";
+        List<Film> films = new ArrayList<>();
+        films.add(defaultFilm);
+        String responseBody = this.mapper.writeValueAsString(films);
+        this.mvc.perform(get("/getByTitle?title="+title)).andExpect(status().isOk()).andExpect(content().string(responseBody));
+    }
+
+    @Test
+    void testGetByGenre() throws Exception {
+        final String genre = "Action";
+        List<Film> films = new ArrayList<>();
+        films.add(defaultFilm);
+        String responseBody = this.mapper.writeValueAsString(films);
+        this.mvc.perform(get("/getByGenre?genre="+genre)).andExpect(status().isOk()).andExpect(content().string(responseBody));
+    }
+
 
 }
