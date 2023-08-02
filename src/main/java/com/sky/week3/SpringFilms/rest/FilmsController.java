@@ -70,5 +70,10 @@ public class FilmsController {
         return service.getFilmByGenre(genre);
     }
 
+    @GetMapping("/getYearByTitle/{title}")
+    public List<Integer> getYearByTitle(@PathVariable String title)  {
+        return service.getYearByTitle(title);
+    }
+
 
 }

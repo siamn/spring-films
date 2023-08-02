@@ -88,5 +88,16 @@ public class FilmsServiceList implements FilmsService {
         return getFilmByMatchingString(genre);
     }
 
+    @Override
+    public List<Integer> getYearByTitle(String title) {
+        List<Integer> found = new ArrayList<>();
+        for (Film film : films) {
+            if (film.getTitle().equals(title)) {
+                found.add(film.getYear());
+            }
+        }
+        return found;
+    }
+
 
 }

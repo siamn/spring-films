@@ -24,4 +24,6 @@ public interface FilmsService {
     List<Film> getFilmByTitle(String title);
 
     List<Film> getFilmByGenre(String genre);
+
+    List<Integer> getYearByTitle(String title);
 }

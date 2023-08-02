@@ -66,4 +66,9 @@ public class FilmsServicesDB implements FilmsService {
     public List<Film> getFilmByGenre(String genre) {
         return this.repo.findByGenre(genre);
     }
+
+    @Override
+    public List<Integer> getYearByTitle(String title) {
+        return this.repo.findYearByTitle(title);
+    }
 }

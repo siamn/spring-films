@@ -18,6 +18,7 @@ public interface FilmRepo extends JpaRepository<Film, Integer> {
     @Query(value = "SELECT * FROM film WHERE genre = ?1", nativeQuery = true)  // native query test
     List<Film> findByGenre(String genre);
 
-
+    @Query("SELECT f.year FROM Film f WHERE f.title = ?1 GROUP BY f.year")
+    List<Integer> findYearByTitle(String title);
 
 }
