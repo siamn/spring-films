@@ -181,6 +181,7 @@ public class FilmsMVCTest {
 
     @Test
     void testCreateFail() throws Exception {
+        // should fail as films beyond a 2025 release year are not allowed
         Film film = new Film("Dune", 2026, "Action");
         String filmJSON = this.mapper.writeValueAsString(film);
         RequestBuilder req = MockMvcRequestBuilders.post("/create").content(filmJSON).contentType(MediaType.APPLICATION_JSON);
