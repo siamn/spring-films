@@ -179,4 +179,17 @@ public class FilmsMVCTest {
     }
 
 
+    @Test
+    void testCreateFail() throws Exception {
+        Film film = new Film("Dune", 2026, "Action");
+        String filmJSON = this.mapper.writeValueAsString(film);
+        RequestBuilder req = MockMvcRequestBuilders.post("/create").content(filmJSON).contentType(MediaType.APPLICATION_JSON);
+
+        ResultMatcher checkStatus = MockMvcResultMatchers.status().isBadRequest();
+
+        this.mvc.perform(req).andExpect(checkStatus);
+    }
+
+
+
 }
