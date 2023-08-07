@@ -69,8 +69,8 @@ public class FilmServicesDBTest {
     @Test
     void testGetFilmByGenre() {
         String genre = "Action";
-        Mockito.when(this.repo.findByTitleContainsIgnoreCase(genre)).thenReturn(List.of(new Film()));
-        Assertions.assertEquals(List.of(new Film()), this.service.getFilmByTitle(genre));
+        Mockito.when(this.repo.findByGenre(genre)).thenReturn(List.of(new Film()));
+        Assertions.assertEquals(List.of(new Film()), this.service.getFilmByGenre(genre));
         Mockito.verify(this.repo, Mockito.times(1)).findByGenre(genre);
     }
 
