@@ -76,4 +76,10 @@ public class FilmsController {
     }
 
 
+    @PatchMapping("/update/{id}")
+    public Film update(@PathVariable int id, @RequestParam(value = "title", required = false) String title, @RequestParam(value = "year", required = false) int year, @RequestParam(value = "genre", required = false) String genre) {
+        return this.service.update(id, title, year, genre);
+    }
+
+
 }

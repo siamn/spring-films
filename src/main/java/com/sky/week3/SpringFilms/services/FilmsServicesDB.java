@@ -71,4 +71,17 @@ public class FilmsServicesDB implements FilmsService {
     public List<Integer> getYearByTitle(String title) {
         return this.repo.findYearByTitle(title);
     }
+
+    @Override
+    public Film update(int id, String title, int year, String genre) {
+        Film toUpdate = this.getById(id);
+
+        if (title != null) toUpdate.setTitle(title);
+        if (genre != null) toUpdate.setGenre(genre);
+        toUpdate.setYear(year);
+
+        return this.repo.save(toUpdate);
+    }
+
+
 }

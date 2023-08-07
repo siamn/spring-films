@@ -194,5 +194,26 @@ public class FilmsMVCTest {
     }
 
 
+    @Test
+    void testUpdate() throws Exception {
+        final int id = 1;
+        final int updatedYear = 2021;
+        final String updatedTitle = "Oppenheimer 0.5";
+        final String updatedGenre = "History";
+        String updatedFilmJSON = this.mapper.writeValueAsString(new Film(id, updatedTitle, updatedYear, updatedGenre));
+        this.mvc.perform(
+                        MockMvcRequestBuilders.patch("/films/update/" + id)
+                                .queryParam("id", String.valueOf(id))
+                                .queryParam("year", String.valueOf(updatedYear))
+                                .queryParam("title", updatedTitle)
+                                .queryParam("genre", updatedGenre)
+                )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(updatedFilmJSON));
+
+    }
+
+
+
 
 }

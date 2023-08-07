@@ -99,5 +99,16 @@ public class FilmsServiceList implements FilmsService {
         return found;
     }
 
+    @Override
+    public Film update(int id, String title, int year, String genre) {
+        Film toUpdate = this.getById(id);
+
+        if (title != null) toUpdate.setTitle(title);
+        if (genre != null) toUpdate.setGenre(genre);
+        if (year > 0) toUpdate.setYear(year);
+
+        return toUpdate;
+    }
+
 
 }
