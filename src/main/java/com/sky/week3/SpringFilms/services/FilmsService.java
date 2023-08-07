@@ -19,7 +19,7 @@ public interface FilmsService {
 
     Film remove(Integer id);
 
-    Boolean remove(Integer year, String title, String genre);
+    Integer remove(Integer year, String title, String genre);
 
     List<Film> getFilmByTitle(String title);
 

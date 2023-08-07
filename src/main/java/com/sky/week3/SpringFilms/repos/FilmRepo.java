@@ -13,7 +13,7 @@ public interface FilmRepo extends JpaRepository<Film, Integer> {
 
     List<Film> findByTitleContainsIgnoreCase(String title);
 
-    void deleteByTitleOrGenreOrYear(String title, String genre, Integer year);
+    Integer deleteByTitleOrGenreOrYear(String title, String genre, Integer year);
 
     @Query(value = "SELECT * FROM film WHERE genre = ?1", nativeQuery = true)  // native query test
     List<Film> findByGenre(String genre);

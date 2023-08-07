@@ -149,7 +149,7 @@ public class FilmsMVCTest {
         final Integer year = 2021;
         final String genre = "Action";
         final String title = "Dune";
-        this.mvc.perform(delete("/remove?title="+title + "&year="+year+"&genre="+genre)).andExpect(status().isOk()).andExpect(content().string("true"));
+        this.mvc.perform(delete("/remove?title="+title + "&year="+year+"&genre="+genre)).andExpect(status().isOk()).andExpect(content().string("1"));
     }
 
 
@@ -197,12 +197,12 @@ public class FilmsMVCTest {
     @Test
     void testUpdate() throws Exception {
         final int id = 1;
-        final int updatedYear = 2021;
-        final String updatedTitle = "Oppenheimer 0.5";
-        final String updatedGenre = "History";
+        final int updatedYear = 1979;
+        final String updatedTitle = "Dune";
+        final String updatedGenre = "Action";
         String updatedFilmJSON = this.mapper.writeValueAsString(new Film(id, updatedTitle, updatedYear, updatedGenre));
         this.mvc.perform(
-                        MockMvcRequestBuilders.patch("/films/update/" + id)
+                        MockMvcRequestBuilders.patch("/update/" + id)
                                 .queryParam("id", String.valueOf(id))
                                 .queryParam("year", String.valueOf(updatedYear))
                                 .queryParam("title", updatedTitle)

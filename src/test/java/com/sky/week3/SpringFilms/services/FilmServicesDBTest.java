@@ -10,10 +10,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest // boots the context (loads all the beans)
+@ActiveProfiles("test")
 public class FilmServicesDBTest {
 
     @Autowired
@@ -41,6 +45,33 @@ public class FilmServicesDBTest {
 
         Mockito.verify(this.repo, Mockito.times(1)).findById(id);
         Mockito.verify(this.repo, Mockito.times(1)).save(updated);
+    }
+
+    @Test
+    void testRemove() {
+        String title = "Dune";
+        String genre = "Action";
+        int year = 2021;
+        Mockito.when(this.repo.deleteByTitleOrGenreOrYear(title,genre,year)).thenReturn(1);
+        Assertions.assertEquals(1, this.service.remove(year, title, genre));
+        Mockito.verify(this.repo, Mockito.times(1)).deleteByTitleOrGenreOrYear(title, genre, year);
+    }
+
+
+    @Test
+    void testGetFilmByTitle() {
+        String title = "Dune";
+        Mockito.when(this.repo.findByTitleContainsIgnoreCase(title)).thenReturn(List.of(new Film()));
+        Assertions.assertEquals(List.of(new Film()), this.service.getFilmByTitle(title));
+        Mockito.verify(this.repo, Mockito.times(1)).findByTitleContainsIgnoreCase(title);
+    }
+
+    @Test
+    void testGetFilmByGenre() {
+        String genre = "Action";
+        Mockito.when(this.repo.findByTitleContainsIgnoreCase(genre)).thenReturn(List.of(new Film()));
+        Assertions.assertEquals(List.of(new Film()), this.service.getFilmByTitle(genre));
+        Mockito.verify(this.repo, Mockito.times(1)).findByGenre(genre);
     }
 
 

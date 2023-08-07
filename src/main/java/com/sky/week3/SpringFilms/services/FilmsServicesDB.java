@@ -51,10 +51,8 @@ public class FilmsServicesDB implements FilmsService {
 
     @Override
     @Transactional
-    public Boolean remove(Integer year, String title, String genre) {
-        int initialSize = this.getAll().size();
-        this.repo.deleteByTitleOrGenreOrYear(title, genre, year);
-        return this.getAll().size() < initialSize;
+    public Integer remove(Integer year, String title, String genre) {
+        return this.repo.deleteByTitleOrGenreOrYear(title, genre, year);
     }
 
     @Override

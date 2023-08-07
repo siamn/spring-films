@@ -51,7 +51,7 @@ public class FilmsServiceList implements FilmsService {
     }
 
     @Override
-    public Boolean remove(Integer year, String title, String genre) {
+    public Integer remove(Integer year, String title, String genre) {
         System.out.println("Title: "+title);
         System.out.println("Genre: "+genre);
         System.out.println("Year:"+ year);
@@ -64,7 +64,7 @@ public class FilmsServiceList implements FilmsService {
                 || film.getYear().equals(year));
 
         System.out.println("After: "+films);
-        return films.size() < initialSize;
+        return films.size() - initialSize;
     }
 
 

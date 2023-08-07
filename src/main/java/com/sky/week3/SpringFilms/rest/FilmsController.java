@@ -52,7 +52,7 @@ public class FilmsController {
 
     @DeleteMapping("/remove")
     // better to integer - number of items removed, more testable that way
-    public Boolean remove(
+    public Integer remove(
             @RequestParam(name = "year", required = false) Integer year,
             @RequestParam(name = "title", required = false) String title,
             @RequestParam(name = "genre", required = false) String genre) {
