@@ -11,7 +11,6 @@ import java.util.Objects;
 @Entity
 public class Film {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
