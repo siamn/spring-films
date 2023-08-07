@@ -75,4 +75,13 @@ public class FilmServicesDBTest {
     }
 
 
+    @Test
+    void testGetByID() {
+        int id = 1;
+        Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(new Film()));
+        Assertions.assertEquals(new Film(), this.service.getById(id));
+        Mockito.verify(this.repo, Mockito.times(1)).findById(id);
+    }
+
+
 }
